@@ -2,7 +2,7 @@
   "license": "GPL-3.0",
   "scripts": {
     "dev": "node scripts/build-definitions.js && vite --force",
-    "build": "bun run build:kbs && tsc && vite build",
+    "build": "vite build",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
     "refresh-kbs": "bun uninstall --force via-keyboards && bun install --force github:the-via/keyboards",
