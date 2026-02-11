@@ -1,3 +1,5 @@
-[
-  "pico-3x3.json"
-]
+{
+  "definitions": [
+    "pico-3x3.json"
+  ]
+}
