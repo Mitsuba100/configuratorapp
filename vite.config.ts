@@ -5,10 +5,21 @@ import {splitVendorChunkPlugin} from 'vite';
 import {createHtmlPlugin} from 'vite-plugin-html';
 import fs from 'fs';
 
-const hash = fs.readFileSync('public/definitions/hash.json', 'utf8');
+// Safety check: if hash.json doesn't exist, use an empty object string
+const getHash = () => {
+  try {
+    return fs.readFileSync('public/definitions/hash.json', 'utf8');
+  } catch (e) {
+    return '{}';
+  }
+};
+
+const hash = getHash();
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  // Set to '/' for custom domains like configurator.stuple.net
+  base: '/', 
   plugins: [
     react(),
     createHtmlPlugin({
@@ -29,14 +40,16 @@ export default defineConfig({
       assets: path.resolve(__dirname, './src/assets'),
     },
   },
+  build: {
+    // This helps with the 'Some chunks are larger than 500 kBs' warning you saw
+    chunkSizeWarningLimit: 1000, 
+  },
   optimizeDeps: {
     include: ['@the-via/reader'],
     esbuildOptions: {
-      // Node.js global to browser globalThis
       define: {
         global: 'globalThis',
       },
-      // Enable esbuild polyfill plugins
       plugins: [],
     },
   },
