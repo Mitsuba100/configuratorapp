@@ -1,5 +1,4 @@
 import {createSelector, createSlice, PayloadAction} from '@reduxjs/toolkit';
-import pico3x3 from '../../definitions/pico-3x3.json';
 import type {
   AuthorizedDevice,
   AuthorizedDevices,
@@ -39,8 +38,6 @@ type LayoutOptionsMap = {[devicePath: string]: LayoutOption[] | null}; // TODO: 
 
 // TODO: should we use some redux local storage action instead of our custom via-app-store/device-store caching for definitions?
 type DefinitionsState = {
-  definitions: [pico3x3 as any], 
-  customDefinitions: [],
   definitions: KeyboardDictionary;
   customDefinitions: KeyboardDictionary;
   layoutOptionsMap: LayoutOptionsMap;
